@@ -6,7 +6,7 @@ async function listaVideos () {
 }
 
 async function criaVideo (titulo, descricao, url, imagem) {
-    const conexao = await fetch("http://localhost:3000/videos", {
+    const conexao = await fetch("http://localhost:3000/video", {
         method: "POST",
         headers: {
             "Content-type" : "application/json"
@@ -17,7 +17,10 @@ async function criaVideo (titulo, descricao, url, imagem) {
             url: url,
             imagem: imagem
         })
-    })
+    });
+    if(!conexao.ok) {
+        throw new Error ("Não foi possível carregar seu vídeo");
+    }
     const conexaoConvertida = await conexao.json();
     return conexaoConvertida
 }
